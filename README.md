@@ -2,7 +2,7 @@
 
 ## Description
 
-[Walkthrough of Profile Generator](https://drive.google.com/file/d/19T07dUj7Jw9KD8LMFrn0NNgSOdm82KB8/view)
+[Walkthrough of Profile Generator](https://drive.google.com/file/d/12fEwF6Tbn-_vkcSo5L1wH-uZ20U__hbx/view)
 
   - The project was made to make a team page of employees by class.
 

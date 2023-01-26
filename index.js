@@ -1,6 +1,6 @@
-const Engineer = require("./lib/Engineer.js");
-const Intern = require("./lib/Intern.js");
-const Manager = require("./lib/Manager.js");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+const Manager = require("./lib/Manager");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
@@ -9,7 +9,8 @@ const distPath = path.join(distDR, "newTeam.html");
 
 // Empty team array for userInput
 teamArray = []
-
+// Empty team name for userInput
+teamName = ""
 // Initial Question prompt
 const initialQ = [
   {
@@ -40,32 +41,32 @@ function handleInitialChoice({ employeeType }) {
           default: htmlBuilder();
         }}
         
-        // Add Manager inquirer Prompt
+        // Add A Manager inquirer Prompt
         function addManager() {
           inquirer.prompt ([
             
             {
+              message: "What's the manager's name?",
               type: "input",
-              name: "managerName",
-              message: "What's the manager's name?"
+              name: "managerName"
             },
             
             {
+              message: "What's the manager's employee ID #?",
               type: "input",
-              name: "managerId",
-              message: "What's the manager's employee ID #?"
+              name: "managerId"
             },
             
             {
+              message: "What's the manager's email?",
               type: "input",
-              name: "managerEmail",
-              message: "What's the manager's email?"
+              name: "managerEmail"
             },
             
             {
+        message: "What's the manager's office #?",
         type: "input",
-        name: "managerOfficeNumber",
-        message: "What's the manager's office #?"
+        name: "managerOfficeNumber"
       }
       
       // Pushing answers to the manager const in teamArray
@@ -78,32 +79,32 @@ function handleInitialChoice({ employeeType }) {
     
   }
   
-  // Add Engineer inquirer Prompt
+  // Add An Engineer inquirer Prompt
   function addEngineer() {
     inquirer.prompt([
       
       {
+        message: "What's the engineer's name?",
         type: "input",
-        name: "engineerName",
-        message: "What's the engineer's name?"
+        name: "engineerName"
       },
       
       {
+        message: "What's the engineer's employee ID #?" ,
         type: "input",
-        name: "engineerId",
-        message: "What's the engineer's employee ID #?" 
+        name: "engineerId"
       },
       
       {
+        message: "What's the engineer's email?",
         type: "input",
-        name: "engineerEmail",
-        message: "What's the engineer's email?"
+        name: "engineerEmail"
       },
       
       {
+        message: "What's the engineer's GitHub user?",
         type: "input",
-        name: "engineerGithub",
-        message: "What's the engineer's GitHub user?"
+        name: "engineerGithub"
       }
       
       // Pushing answers to the engineer const in teamArray
@@ -116,32 +117,32 @@ function handleInitialChoice({ employeeType }) {
     
   }
   
-  // Add Intern inquirer Prompt
+  // Add An Intern inquirer Prompt
   function addIntern() {
     inquirer.prompt([
       
       {
+        message: "What's the intern's name?",
         type: "input",
-        name: "internName",
-        message: "What's the intern's name?"
+        name: "internName"
       },
       
       {
+        message: "What's the intern's employee ID #?",
         type: "input",
-        name: "internId",
-        message: "What's the intern's employee ID #?" 
+        name: "internId"
       },
       
       {
+        message: "What's' the intern's email?",
         type: "input",
-        name: "internEmail",
-        message: "What's' the intern's email?"
+        name: "internEmail"
       },
       
       {
+        message: "What school(s) is the intern enrolled at?",
         type: "input",
-        name: "internSchool",
-        message: "What school is the intern enrolled at?"
+        name: "internSchool"
       }
       
       // Pushing answers to the intern const in teamArray
@@ -160,14 +161,16 @@ function handleInitialChoice({ employeeType }) {
     
     const makeTeam = team => {
 
-      // create the manager html
+      // Manager HTML template
       const makeManager = manager => {
           return `
-  <div class="card employee-card">
+  <div class="card employeeCard">
+
       <div class="card-header bg-neutral-100 text-black rounded-t-3xl pl-3 pt-2 pb-2 pr-4">
           <h2 class="card-title font-semibold text-4xl">${manager.getName()}</h2>
           <h3 class="card-title font-semibold text-2xl">${manager.getRole()}</h3>
       </div>
+
       <div class="card-body bg-zinc-300 rounded-b-3xl pr-10 pl-3">
           <ul class="list-group list-group leading-8 font-medium">
               <li class="list-group-item">ID: ${manager.getId()}</li>
@@ -175,18 +178,21 @@ function handleInitialChoice({ employeeType }) {
               <li class="list-group-item">Office number: ${manager.getOfficeNumber()}</li>
           </ul>
       </div>
+
   </div>
           `;
       };
   
-      // create the html for engineers
+      // Engineer HTML template
       const makeEngineer = engineer => {
           return `
-  <div class="card employee-card">
+  <div class="card employeeCard">
+
       <div class="card-header bg-neutral-100 text-black rounded-t-3xl pl-3 pt-2 pb-2 pr-4">
           <h2 class="card-title font-semibold text-4xl">${engineer.getName()}</h2>
           <h3 class="card-title font-semibold text-2xl">${engineer.getRole()}</h3>
       </div>
+
       <div class="card-body bg-zinc-300 rounded-b-3xl pr-10 pl-3">
           <ul class="list-group list-group leading-8 font-medium">
               <li class="list-group-item">ID: ${engineer.getId()}</li>
@@ -194,18 +200,21 @@ function handleInitialChoice({ employeeType }) {
               <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.getGithub()}" target="_blank" rel="noopener noreferrer">${engineer.getGithub()}</a></li>
           </ul>
       </div>
+
   </div>
           `;
       };
   
-      // create the html for interns
+      // Intern HTML template
       const makeIntern = intern => {
           return `
-  <div class="card employee-card">
+  <div class="card employeeCard">
+
       <div class="card-header bg-neutral-100 text-black rounded-t-3xl pl-3 pt-2 pb-2 pr-4">
           <h2 class="card-title font-semibold text-4xl">${intern.getName()}</h2>
           <h3 class="card-title font-semibold text-2xl">${intern.getRole()}</h3>
       </div>
+
       <div class="card-body bg-zinc-300 rounded-b-3xl pr-10 pl-3">
           <ul class="list-group list-group leading-8 font-medium">
               <li class="list-group-item">ID: ${intern.getId()}</li>
@@ -213,15 +222,17 @@ function handleInitialChoice({ employeeType }) {
               <li class="list-group-item">School: ${intern.getSchool()}</li>
           </ul>
       </div>
+
   </div>
           `;
       };
-  
+
+      // Pushing each employee type into the HTML
       const html = [];
-  
       html.push(team
           .filter(employee => employee.getRole() === "Manager")
           .map(manager => makeManager(manager))
+          .join("")
       );
       html.push(team
           .filter(employee => employee.getRole() === "Engineer")
@@ -232,12 +243,11 @@ function handleInitialChoice({ employeeType }) {
           .filter(employee => employee.getRole() === "Intern")
           .map(intern => makeIntern(intern))
           .join("")
-      );
-  
-      return html.join("");
-  
-  }
-  
+          );
+          return html.join("");
+    }
+
+  // HTML Head/Body Template
   const html2 = `
   <!DOCTYPE html>
   <html lang="en">
@@ -249,13 +259,13 @@ function handleInitialChoice({ employeeType }) {
       <link rel="stylesheet" href="style.css">
       <title>My Team</title>
   </head>
-  
+
   <body>
 
     <nav>
       <div class="row">
         <div class="w-full text-center inline-block align-center h-40 bg-black">
-          <h1 class="text-white text-5xl pt-12 font-bold">My Team</h1>
+          <h1 class="text-white text-5xl pt-14 font-bold">My Team</h1>
         </div>
       </div>
     </nav>
@@ -267,19 +277,43 @@ function handleInitialChoice({ employeeType }) {
               </div>
           </div>
       </div>
+
   </body>
+
   </html>
       `;
 
+    // Writes new HTML file in the 'dist' folder
     fs.writeFileSync(distPath, html2, "UTF-8")
-    
   }
-  
+
+  const initialQ2 = [
+    {
+      message: "What's the teams name?",
+      type: 'input',
+      name: 'teamName'
+    }
+  ];
   // Starts the prompt
   function init() {
+    //addTeam()
     inquirer.prompt(initialQ)
     .then(handleInitialChoice)
   }
-  
-  // Start of Everything
+
+  //function addTeam() {
+    //inquirer.prompt([
+      //{
+        //message: "What's the teams name?",
+        //type: "input",
+        //name: "teamName"
+      //}
+    //]).then(answers => {
+      //const team = answers;
+      //teamName.push(team);
+      //inquirer.prompt(initialQ)
+      //.then(handleInitialChoice)
+    //});
+//}
+  // This is the START of Everything
   init();
