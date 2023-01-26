@@ -7,20 +7,20 @@ test("When used with the \"new\" keyword, instantiates an Employee object", () =
   expect(typeof(e)).toBe("object");
 });
 
-test("The first constructor argument will set the \"id\" property", () => {
+test("The first constructor argument will set the \"name\" property", () => {
   // Arrange
-  const id = "Mavis";
-  const e = new Employee(id);
+  const name = "Mavis";
+  const e = new Employee(name);
   // Assert
-  expect(e.id).toBe(id);
+  expect(e.name).toBe(name);
 });
 
-test("The second constructor argument will set the \"name\" property", () => {
+test("The second constructor argument will set the \"id\" property", () => {
   // Arrange
   const controlVal = 1;
   const e = new Employee("Mavis", controlVal);
   // Assert
-  expect(e.name).toBe(controlVal);
+  expect(e.id).toBe(controlVal);
 });
 
 test("The third constructor argument will set the \"email\" property", () => {
@@ -34,7 +34,7 @@ test("The third constructor argument will set the \"email\" property", () => {
 test("getName() returns a \"name\" string", () => {
   // Arrange
   const controlVal = "Mavis";
-  const e = new Employee('21', controlVal);
+  const e = new Employee(controlVal, '21');
   // Assert
   expect(e.getName()).toBe(controlVal);
 });
@@ -42,7 +42,7 @@ test("getName() returns a \"name\" string", () => {
 test("getId() returns an \"id\" integer", () => {
   // Arrange
   const controlVal = 1;
-  const e = new Employee(controlVal, 'Marvin');
+  const e = new Employee('Marvin', controlVal);
   // Assert
   expect(e.getId()).toBe(controlVal);
 });
